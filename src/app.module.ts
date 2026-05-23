@@ -20,6 +20,7 @@ import { TaskModule } from './task/task.module';
       serveRoot: '/uploads',
     }),
     PrismaModule,
+    NewsModule,
     MulterModule,
   ],
   controllers: [AppController],
