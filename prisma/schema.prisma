@@ -1,8 +1,105 @@
 generator client {
   provider = "prisma-client"
-  // output   = "../src/generated/prisma"
+  output   = "./generated"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  firstName String @map("first_name")
+  lastName String @map("last_name")
+  role Role @default(ACADEMICIAN)
+  createdAt DateTime @default(now()) @map("created_at")
+  tasks Task[]
+
+  @@map("user")
+}
+
+model News {
+  id Int @id @default(autoincrement())
+  title String
+  category String
+  imagePath String @map("image_path")
+  text String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("news")
+}
+
+model Task {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  reward String
+  conditions String[]
+  status TaskStatus @default(FREE)
+  image String
+  completed TaskDone?
+  user User? @relation(fields: [userId], references: [id])
+  userId Int? @map("user_id")
+
+  @@map("task")
+}
+
+model TaskDone {
+  id Int @id @default(autoincrement())
+  task Task @relation(fields: [taskId], references: [id])
+  taskId Int @unique @map("task_id")
+  images String[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("task_done")
+}
+
+model Lecture {
+  id Int @id @default(autoincrement())
+  text String
+  status LectureStatus @default(OPENED)
+  reports LectureReport[]
+
+  @@map("lecture")
+}
+
+model LectureReport {
+  id Int @id @default(autoincrement())
+  count Int
+  intervention String
+  images String[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+  lecture Lecture @relation(fields: [lectureId], references: [id])
+  lectureId Int @map("lecture_id")
+
+  @@map("lecture_report")
+}
+
+enum Role {
+  CHIEF
+  VICE_CHIEF
+  SPECIAL_FORCE_SECURITY
+  BHZ_COUNTERMEASURE_FORCE
+  SCIENTIFIC_FIRST_CLASS
+  SCIENTIFIC_SECOND_CLASS
+  OBSERVER
+  PROFESSOR
+  BACHELOR
+  ACADEMICIAN
+}
+
+enum TaskStatus {
+  FREE
+  PROGRESS
+  DONE
+  WAITING
+  ERROR
+}
+
+enum LectureStatus {
+  OPENED
+  WAITING
+  CLOSED
 }
