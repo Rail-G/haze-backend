@@ -37,7 +37,7 @@ model Task {
   reward String
   conditions String[]
   status TaskStatus @default(FREE)
-  image String
+  imagePath String
   completed TaskDone?
   user User? @relation(fields: [userId], references: [id])
   userId Int? @map("user_id")
@@ -49,7 +49,7 @@ model TaskDone {
   id Int @id @default(autoincrement())
   task Task @relation(fields: [taskId], references: [id])
   taskId Int @unique @map("task_id")
-  images String[]
+  imagePaths String[]
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("task_done")
@@ -68,7 +68,7 @@ model LectureReport {
   id Int @id @default(autoincrement())
   count Int
   intervention String
-  images String[]
+  imagePaths String[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")
   lecture Lecture @relation(fields: [lectureId], references: [id])

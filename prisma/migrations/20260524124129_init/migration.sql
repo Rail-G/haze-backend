@@ -38,7 +38,7 @@ CREATE TABLE "task" (
     "reward" TEXT NOT NULL,
     "conditions" TEXT[],
     "status" "TaskStatus" NOT NULL DEFAULT 'FREE',
-    "image" TEXT NOT NULL,
+    "imagePath" TEXT NOT NULL,
     "user_id" INTEGER,
 
     CONSTRAINT "task_pkey" PRIMARY KEY ("id")
@@ -48,7 +48,7 @@ CREATE TABLE "task" (
 CREATE TABLE "task_done" (
     "id" SERIAL NOT NULL,
     "task_id" INTEGER NOT NULL,
-    "images" TEXT[],
+    "imagePaths" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "task_done_pkey" PRIMARY KEY ("id")
@@ -68,7 +68,7 @@ CREATE TABLE "lecture_report" (
     "id" SERIAL NOT NULL,
     "count" INTEGER NOT NULL,
     "intervention" TEXT NOT NULL,
-    "images" TEXT[],
+    "imagePaths" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "lecture_id" INTEGER NOT NULL,

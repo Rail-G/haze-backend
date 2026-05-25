@@ -51,7 +51,7 @@ export type TaskDoneMaxAggregateOutputType = {
 export type TaskDoneCountAggregateOutputType = {
   id: number
   taskId: number
-  images: number
+  imagePaths: number
   createdAt: number
   _all: number
 }
@@ -82,7 +82,7 @@ export type TaskDoneMaxAggregateInputType = {
 export type TaskDoneCountAggregateInputType = {
   id?: true
   taskId?: true
-  images?: true
+  imagePaths?: true
   createdAt?: true
   _all?: true
 }
@@ -176,7 +176,7 @@ export type TaskDoneGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type TaskDoneGroupByOutputType = {
   id: number
   taskId: number
-  images: string[]
+  imagePaths: string[]
   createdAt: Date
   _count: TaskDoneCountAggregateOutputType | null
   _avg: TaskDoneAvgAggregateOutputType | null
@@ -206,7 +206,7 @@ export type TaskDoneWhereInput = {
   NOT?: Prisma.TaskDoneWhereInput | Prisma.TaskDoneWhereInput[]
   id?: Prisma.IntFilter<"TaskDone"> | number
   taskId?: Prisma.IntFilter<"TaskDone"> | number
-  images?: Prisma.StringNullableListFilter<"TaskDone">
+  imagePaths?: Prisma.StringNullableListFilter<"TaskDone">
   createdAt?: Prisma.DateTimeFilter<"TaskDone"> | Date | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
 }
@@ -214,7 +214,7 @@ export type TaskDoneWhereInput = {
 export type TaskDoneOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
-  images?: Prisma.SortOrder
+  imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   task?: Prisma.TaskOrderByWithRelationInput
 }
@@ -225,7 +225,7 @@ export type TaskDoneWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TaskDoneWhereInput | Prisma.TaskDoneWhereInput[]
   OR?: Prisma.TaskDoneWhereInput[]
   NOT?: Prisma.TaskDoneWhereInput | Prisma.TaskDoneWhereInput[]
-  images?: Prisma.StringNullableListFilter<"TaskDone">
+  imagePaths?: Prisma.StringNullableListFilter<"TaskDone">
   createdAt?: Prisma.DateTimeFilter<"TaskDone"> | Date | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
 }, "id" | "taskId">
@@ -233,7 +233,7 @@ export type TaskDoneWhereUniqueInput = Prisma.AtLeast<{
 export type TaskDoneOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
-  images?: Prisma.SortOrder
+  imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.TaskDoneCountOrderByAggregateInput
   _avg?: Prisma.TaskDoneAvgOrderByAggregateInput
@@ -248,52 +248,52 @@ export type TaskDoneScalarWhereWithAggregatesInput = {
   NOT?: Prisma.TaskDoneScalarWhereWithAggregatesInput | Prisma.TaskDoneScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"TaskDone"> | number
   taskId?: Prisma.IntWithAggregatesFilter<"TaskDone"> | number
-  images?: Prisma.StringNullableListFilter<"TaskDone">
+  imagePaths?: Prisma.StringNullableListFilter<"TaskDone">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TaskDone"> | Date | string
 }
 
 export type TaskDoneCreateInput = {
-  images?: Prisma.TaskDoneCreateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneCreateimagePathsInput | string[]
   createdAt?: Date | string
-  task: Prisma.TaskCreateNestedOneWithoutTaskDoneInput
+  task: Prisma.TaskCreateNestedOneWithoutCompletedInput
 }
 
 export type TaskDoneUncheckedCreateInput = {
   id?: number
   taskId: number
-  images?: Prisma.TaskDoneCreateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneCreateimagePathsInput | string[]
   createdAt?: Date | string
 }
 
 export type TaskDoneUpdateInput = {
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TaskUpdateOneRequiredWithoutTaskDoneNestedInput
+  task?: Prisma.TaskUpdateOneRequiredWithoutCompletedNestedInput
 }
 
 export type TaskDoneUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   taskId?: Prisma.IntFieldUpdateOperationsInput | number
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskDoneCreateManyInput = {
   id?: number
   taskId: number
-  images?: Prisma.TaskDoneCreateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneCreateimagePathsInput | string[]
   createdAt?: Date | string
 }
 
 export type TaskDoneUpdateManyMutationInput = {
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskDoneUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   taskId?: Prisma.IntFieldUpdateOperationsInput | number
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -305,7 +305,7 @@ export type TaskDoneNullableScalarRelationFilter = {
 export type TaskDoneCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
-  images?: Prisma.SortOrder
+  imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -363,23 +363,23 @@ export type TaskDoneUncheckedUpdateOneWithoutTaskNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TaskDoneUpdateToOneWithWhereWithoutTaskInput, Prisma.TaskDoneUpdateWithoutTaskInput>, Prisma.TaskDoneUncheckedUpdateWithoutTaskInput>
 }
 
-export type TaskDoneCreateimagesInput = {
+export type TaskDoneCreateimagePathsInput = {
   set: string[]
 }
 
-export type TaskDoneUpdateimagesInput = {
+export type TaskDoneUpdateimagePathsInput = {
   set?: string[]
   push?: string | string[]
 }
 
 export type TaskDoneCreateWithoutTaskInput = {
-  images?: Prisma.TaskDoneCreateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneCreateimagePathsInput | string[]
   createdAt?: Date | string
 }
 
 export type TaskDoneUncheckedCreateWithoutTaskInput = {
   id?: number
-  images?: Prisma.TaskDoneCreateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneCreateimagePathsInput | string[]
   createdAt?: Date | string
 }
 
@@ -400,13 +400,13 @@ export type TaskDoneUpdateToOneWithWhereWithoutTaskInput = {
 }
 
 export type TaskDoneUpdateWithoutTaskInput = {
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TaskDoneUncheckedUpdateWithoutTaskInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  images?: Prisma.TaskDoneUpdateimagesInput | string[]
+  imagePaths?: Prisma.TaskDoneUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -415,7 +415,7 @@ export type TaskDoneUncheckedUpdateWithoutTaskInput = {
 export type TaskDoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   taskId?: boolean
-  images?: boolean
+  imagePaths?: boolean
   createdAt?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskDone"]>
@@ -423,7 +423,7 @@ export type TaskDoneSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type TaskDoneSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   taskId?: boolean
-  images?: boolean
+  imagePaths?: boolean
   createdAt?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskDone"]>
@@ -431,7 +431,7 @@ export type TaskDoneSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type TaskDoneSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   taskId?: boolean
-  images?: boolean
+  imagePaths?: boolean
   createdAt?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskDone"]>
@@ -439,11 +439,11 @@ export type TaskDoneSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type TaskDoneSelectScalar = {
   id?: boolean
   taskId?: boolean
-  images?: boolean
+  imagePaths?: boolean
   createdAt?: boolean
 }
 
-export type TaskDoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "taskId" | "images" | "createdAt", ExtArgs["result"]["taskDone"]>
+export type TaskDoneOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "taskId" | "imagePaths" | "createdAt", ExtArgs["result"]["taskDone"]>
 export type TaskDoneInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
 }
@@ -462,7 +462,7 @@ export type $TaskDonePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     taskId: number
-    images: string[]
+    imagePaths: string[]
     createdAt: Date
   }, ExtArgs["result"]["taskDone"]>
   composites: {}
@@ -890,7 +890,7 @@ export interface Prisma__TaskDoneClient<T, Null = never, ExtArgs extends runtime
 export interface TaskDoneFieldRefs {
   readonly id: Prisma.FieldRef<"TaskDone", 'Int'>
   readonly taskId: Prisma.FieldRef<"TaskDone", 'Int'>
-  readonly images: Prisma.FieldRef<"TaskDone", 'String[]'>
+  readonly imagePaths: Prisma.FieldRef<"TaskDone", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"TaskDone", 'DateTime'>
 }
     

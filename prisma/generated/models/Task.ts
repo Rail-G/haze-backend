@@ -42,7 +42,7 @@ export type TaskMinAggregateOutputType = {
   description: string | null
   reward: string | null
   status: $Enums.TaskStatus | null
-  image: string | null
+  imagePath: string | null
   userId: number | null
 }
 
@@ -52,7 +52,7 @@ export type TaskMaxAggregateOutputType = {
   description: string | null
   reward: string | null
   status: $Enums.TaskStatus | null
-  image: string | null
+  imagePath: string | null
   userId: number | null
 }
 
@@ -63,7 +63,7 @@ export type TaskCountAggregateOutputType = {
   reward: number
   conditions: number
   status: number
-  image: number
+  imagePath: number
   userId: number
   _all: number
 }
@@ -85,7 +85,7 @@ export type TaskMinAggregateInputType = {
   description?: true
   reward?: true
   status?: true
-  image?: true
+  imagePath?: true
   userId?: true
 }
 
@@ -95,7 +95,7 @@ export type TaskMaxAggregateInputType = {
   description?: true
   reward?: true
   status?: true
-  image?: true
+  imagePath?: true
   userId?: true
 }
 
@@ -106,7 +106,7 @@ export type TaskCountAggregateInputType = {
   reward?: true
   conditions?: true
   status?: true
-  image?: true
+  imagePath?: true
   userId?: true
   _all?: true
 }
@@ -204,7 +204,7 @@ export type TaskGroupByOutputType = {
   reward: string
   conditions: string[]
   status: $Enums.TaskStatus
-  image: string
+  imagePath: string
   userId: number | null
   _count: TaskCountAggregateOutputType | null
   _avg: TaskAvgAggregateOutputType | null
@@ -238,9 +238,9 @@ export type TaskWhereInput = {
   reward?: Prisma.StringFilter<"Task"> | string
   conditions?: Prisma.StringNullableListFilter<"Task">
   status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
-  image?: Prisma.StringFilter<"Task"> | string
+  imagePath?: Prisma.StringFilter<"Task"> | string
   userId?: Prisma.IntNullableFilter<"Task"> | number | null
-  taskDone?: Prisma.XOR<Prisma.TaskDoneNullableScalarRelationFilter, Prisma.TaskDoneWhereInput> | null
+  completed?: Prisma.XOR<Prisma.TaskDoneNullableScalarRelationFilter, Prisma.TaskDoneWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -251,9 +251,9 @@ export type TaskOrderByWithRelationInput = {
   reward?: Prisma.SortOrder
   conditions?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  imagePath?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  taskDone?: Prisma.TaskDoneOrderByWithRelationInput
+  completed?: Prisma.TaskDoneOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -267,9 +267,9 @@ export type TaskWhereUniqueInput = Prisma.AtLeast<{
   reward?: Prisma.StringFilter<"Task"> | string
   conditions?: Prisma.StringNullableListFilter<"Task">
   status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
-  image?: Prisma.StringFilter<"Task"> | string
+  imagePath?: Prisma.StringFilter<"Task"> | string
   userId?: Prisma.IntNullableFilter<"Task"> | number | null
-  taskDone?: Prisma.XOR<Prisma.TaskDoneNullableScalarRelationFilter, Prisma.TaskDoneWhereInput> | null
+  completed?: Prisma.XOR<Prisma.TaskDoneNullableScalarRelationFilter, Prisma.TaskDoneWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
@@ -280,7 +280,7 @@ export type TaskOrderByWithAggregationInput = {
   reward?: Prisma.SortOrder
   conditions?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  imagePath?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TaskCountOrderByAggregateInput
   _avg?: Prisma.TaskAvgOrderByAggregateInput
@@ -299,7 +299,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   reward?: Prisma.StringWithAggregatesFilter<"Task"> | string
   conditions?: Prisma.StringNullableListFilter<"Task">
   status?: Prisma.EnumTaskStatusWithAggregatesFilter<"Task"> | $Enums.TaskStatus
-  image?: Prisma.StringWithAggregatesFilter<"Task"> | string
+  imagePath?: Prisma.StringWithAggregatesFilter<"Task"> | string
   userId?: Prisma.IntNullableWithAggregatesFilter<"Task"> | number | null
 }
 
@@ -309,8 +309,8 @@ export type TaskCreateInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
-  taskDone?: Prisma.TaskDoneCreateNestedOneWithoutTaskInput
+  imagePath: string
+  completed?: Prisma.TaskDoneCreateNestedOneWithoutTaskInput
   user?: Prisma.UserCreateNestedOneWithoutTasksInput
 }
 
@@ -321,9 +321,9 @@ export type TaskUncheckedCreateInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
+  imagePath: string
   userId?: number | null
-  taskDone?: Prisma.TaskDoneUncheckedCreateNestedOneWithoutTaskInput
+  completed?: Prisma.TaskDoneUncheckedCreateNestedOneWithoutTaskInput
 }
 
 export type TaskUpdateInput = {
@@ -332,8 +332,8 @@ export type TaskUpdateInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  taskDone?: Prisma.TaskDoneUpdateOneWithoutTaskNestedInput
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.TaskDoneUpdateOneWithoutTaskNestedInput
   user?: Prisma.UserUpdateOneWithoutTasksNestedInput
 }
 
@@ -344,9 +344,9 @@ export type TaskUncheckedUpdateInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  taskDone?: Prisma.TaskDoneUncheckedUpdateOneWithoutTaskNestedInput
+  completed?: Prisma.TaskDoneUncheckedUpdateOneWithoutTaskNestedInput
 }
 
 export type TaskCreateManyInput = {
@@ -356,7 +356,7 @@ export type TaskCreateManyInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
+  imagePath: string
   userId?: number | null
 }
 
@@ -366,7 +366,7 @@ export type TaskUpdateManyMutationInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type TaskUncheckedUpdateManyInput = {
@@ -376,7 +376,7 @@ export type TaskUncheckedUpdateManyInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -405,7 +405,7 @@ export type TaskCountOrderByAggregateInput = {
   reward?: Prisma.SortOrder
   conditions?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  imagePath?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -420,7 +420,7 @@ export type TaskMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  imagePath?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -430,7 +430,7 @@ export type TaskMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  image?: Prisma.SortOrder
+  imagePath?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -507,18 +507,18 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type TaskCreateNestedOneWithoutTaskDoneInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutTaskDoneInput, Prisma.TaskUncheckedCreateWithoutTaskDoneInput>
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTaskDoneInput
+export type TaskCreateNestedOneWithoutCompletedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCompletedInput, Prisma.TaskUncheckedCreateWithoutCompletedInput>
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCompletedInput
   connect?: Prisma.TaskWhereUniqueInput
 }
 
-export type TaskUpdateOneRequiredWithoutTaskDoneNestedInput = {
-  create?: Prisma.XOR<Prisma.TaskCreateWithoutTaskDoneInput, Prisma.TaskUncheckedCreateWithoutTaskDoneInput>
-  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutTaskDoneInput
-  upsert?: Prisma.TaskUpsertWithoutTaskDoneInput
+export type TaskUpdateOneRequiredWithoutCompletedNestedInput = {
+  create?: Prisma.XOR<Prisma.TaskCreateWithoutCompletedInput, Prisma.TaskUncheckedCreateWithoutCompletedInput>
+  connectOrCreate?: Prisma.TaskCreateOrConnectWithoutCompletedInput
+  upsert?: Prisma.TaskUpsertWithoutCompletedInput
   connect?: Prisma.TaskWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskUpdateToOneWithWhereWithoutTaskDoneInput, Prisma.TaskUpdateWithoutTaskDoneInput>, Prisma.TaskUncheckedUpdateWithoutTaskDoneInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskUpdateToOneWithWhereWithoutCompletedInput, Prisma.TaskUpdateWithoutCompletedInput>, Prisma.TaskUncheckedUpdateWithoutCompletedInput>
 }
 
 export type TaskCreateWithoutUserInput = {
@@ -527,8 +527,8 @@ export type TaskCreateWithoutUserInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
-  taskDone?: Prisma.TaskDoneCreateNestedOneWithoutTaskInput
+  imagePath: string
+  completed?: Prisma.TaskDoneCreateNestedOneWithoutTaskInput
 }
 
 export type TaskUncheckedCreateWithoutUserInput = {
@@ -538,8 +538,8 @@ export type TaskUncheckedCreateWithoutUserInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
-  taskDone?: Prisma.TaskDoneUncheckedCreateNestedOneWithoutTaskInput
+  imagePath: string
+  completed?: Prisma.TaskDoneUncheckedCreateNestedOneWithoutTaskInput
 }
 
 export type TaskCreateOrConnectWithoutUserInput = {
@@ -578,65 +578,65 @@ export type TaskScalarWhereInput = {
   reward?: Prisma.StringFilter<"Task"> | string
   conditions?: Prisma.StringNullableListFilter<"Task">
   status?: Prisma.EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
-  image?: Prisma.StringFilter<"Task"> | string
+  imagePath?: Prisma.StringFilter<"Task"> | string
   userId?: Prisma.IntNullableFilter<"Task"> | number | null
 }
 
-export type TaskCreateWithoutTaskDoneInput = {
+export type TaskCreateWithoutCompletedInput = {
   title: string
   description: string
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
+  imagePath: string
   user?: Prisma.UserCreateNestedOneWithoutTasksInput
 }
 
-export type TaskUncheckedCreateWithoutTaskDoneInput = {
+export type TaskUncheckedCreateWithoutCompletedInput = {
   id?: number
   title: string
   description: string
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
+  imagePath: string
   userId?: number | null
 }
 
-export type TaskCreateOrConnectWithoutTaskDoneInput = {
+export type TaskCreateOrConnectWithoutCompletedInput = {
   where: Prisma.TaskWhereUniqueInput
-  create: Prisma.XOR<Prisma.TaskCreateWithoutTaskDoneInput, Prisma.TaskUncheckedCreateWithoutTaskDoneInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutCompletedInput, Prisma.TaskUncheckedCreateWithoutCompletedInput>
 }
 
-export type TaskUpsertWithoutTaskDoneInput = {
-  update: Prisma.XOR<Prisma.TaskUpdateWithoutTaskDoneInput, Prisma.TaskUncheckedUpdateWithoutTaskDoneInput>
-  create: Prisma.XOR<Prisma.TaskCreateWithoutTaskDoneInput, Prisma.TaskUncheckedCreateWithoutTaskDoneInput>
+export type TaskUpsertWithoutCompletedInput = {
+  update: Prisma.XOR<Prisma.TaskUpdateWithoutCompletedInput, Prisma.TaskUncheckedUpdateWithoutCompletedInput>
+  create: Prisma.XOR<Prisma.TaskCreateWithoutCompletedInput, Prisma.TaskUncheckedCreateWithoutCompletedInput>
   where?: Prisma.TaskWhereInput
 }
 
-export type TaskUpdateToOneWithWhereWithoutTaskDoneInput = {
+export type TaskUpdateToOneWithWhereWithoutCompletedInput = {
   where?: Prisma.TaskWhereInput
-  data: Prisma.XOR<Prisma.TaskUpdateWithoutTaskDoneInput, Prisma.TaskUncheckedUpdateWithoutTaskDoneInput>
+  data: Prisma.XOR<Prisma.TaskUpdateWithoutCompletedInput, Prisma.TaskUncheckedUpdateWithoutCompletedInput>
 }
 
-export type TaskUpdateWithoutTaskDoneInput = {
+export type TaskUpdateWithoutCompletedInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneWithoutTasksNestedInput
 }
 
-export type TaskUncheckedUpdateWithoutTaskDoneInput = {
+export type TaskUncheckedUpdateWithoutCompletedInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -647,7 +647,7 @@ export type TaskCreateManyUserInput = {
   reward: string
   conditions?: Prisma.TaskCreateconditionsInput | string[]
   status?: $Enums.TaskStatus
-  image: string
+  imagePath: string
 }
 
 export type TaskUpdateWithoutUserInput = {
@@ -656,8 +656,8 @@ export type TaskUpdateWithoutUserInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  taskDone?: Prisma.TaskDoneUpdateOneWithoutTaskNestedInput
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.TaskDoneUpdateOneWithoutTaskNestedInput
 }
 
 export type TaskUncheckedUpdateWithoutUserInput = {
@@ -667,8 +667,8 @@ export type TaskUncheckedUpdateWithoutUserInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
-  taskDone?: Prisma.TaskDoneUncheckedUpdateOneWithoutTaskNestedInput
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.TaskDoneUncheckedUpdateOneWithoutTaskNestedInput
 }
 
 export type TaskUncheckedUpdateManyWithoutUserInput = {
@@ -678,7 +678,7 @@ export type TaskUncheckedUpdateManyWithoutUserInput = {
   reward?: Prisma.StringFieldUpdateOperationsInput | string
   conditions?: Prisma.TaskUpdateconditionsInput | string[]
   status?: Prisma.EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
-  image?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePath?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -690,9 +690,9 @@ export type TaskSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reward?: boolean
   conditions?: boolean
   status?: boolean
-  image?: boolean
+  imagePath?: boolean
   userId?: boolean
-  taskDone?: boolean | Prisma.Task$taskDoneArgs<ExtArgs>
+  completed?: boolean | Prisma.Task$completedArgs<ExtArgs>
   user?: boolean | Prisma.Task$userArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
 
@@ -703,7 +703,7 @@ export type TaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   reward?: boolean
   conditions?: boolean
   status?: boolean
-  image?: boolean
+  imagePath?: boolean
   userId?: boolean
   user?: boolean | Prisma.Task$userArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
@@ -715,7 +715,7 @@ export type TaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   reward?: boolean
   conditions?: boolean
   status?: boolean
-  image?: boolean
+  imagePath?: boolean
   userId?: boolean
   user?: boolean | Prisma.Task$userArgs<ExtArgs>
 }, ExtArgs["result"]["task"]>
@@ -727,13 +727,13 @@ export type TaskSelectScalar = {
   reward?: boolean
   conditions?: boolean
   status?: boolean
-  image?: boolean
+  imagePath?: boolean
   userId?: boolean
 }
 
-export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "reward" | "conditions" | "status" | "image" | "userId", ExtArgs["result"]["task"]>
+export type TaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "reward" | "conditions" | "status" | "imagePath" | "userId", ExtArgs["result"]["task"]>
 export type TaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  taskDone?: boolean | Prisma.Task$taskDoneArgs<ExtArgs>
+  completed?: boolean | Prisma.Task$completedArgs<ExtArgs>
   user?: boolean | Prisma.Task$userArgs<ExtArgs>
 }
 export type TaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -746,7 +746,7 @@ export type TaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Task"
   objects: {
-    taskDone: Prisma.$TaskDonePayload<ExtArgs> | null
+    completed: Prisma.$TaskDonePayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -756,7 +756,7 @@ export type $TaskPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reward: string
     conditions: string[]
     status: $Enums.TaskStatus
-    image: string
+    imagePath: string
     userId: number | null
   }, ExtArgs["result"]["task"]>
   composites: {}
@@ -1152,7 +1152,7 @@ readonly fields: TaskFieldRefs;
  */
 export interface Prisma__TaskClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  taskDone<T extends Prisma.Task$taskDoneArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$taskDoneArgs<ExtArgs>>): Prisma.Prisma__TaskDoneClient<runtime.Types.Result.GetResult<Prisma.$TaskDonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  completed<T extends Prisma.Task$completedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$completedArgs<ExtArgs>>): Prisma.Prisma__TaskDoneClient<runtime.Types.Result.GetResult<Prisma.$TaskDonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.Task$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Task$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1189,7 +1189,7 @@ export interface TaskFieldRefs {
   readonly reward: Prisma.FieldRef<"Task", 'String'>
   readonly conditions: Prisma.FieldRef<"Task", 'String[]'>
   readonly status: Prisma.FieldRef<"Task", 'TaskStatus'>
-  readonly image: Prisma.FieldRef<"Task", 'String'>
+  readonly imagePath: Prisma.FieldRef<"Task", 'String'>
   readonly userId: Prisma.FieldRef<"Task", 'Int'>
 }
     
@@ -1592,9 +1592,9 @@ export type TaskDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Task.taskDone
+ * Task.completed
  */
-export type Task$taskDoneArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Task$completedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TaskDone
    */

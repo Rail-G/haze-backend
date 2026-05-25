@@ -922,7 +922,7 @@ export const TaskScalarFieldEnum = {
   reward: 'reward',
   conditions: 'conditions',
   status: 'status',
-  image: 'image',
+  imagePath: 'imagePath',
   userId: 'userId'
 } as const
 
@@ -932,7 +932,7 @@ export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof Task
 export const TaskDoneScalarFieldEnum = {
   id: 'id',
   taskId: 'taskId',
-  images: 'images',
+  imagePaths: 'imagePaths',
   createdAt: 'createdAt'
 } as const
 
@@ -952,7 +952,7 @@ export const LectureReportScalarFieldEnum = {
   id: 'id',
   count: 'count',
   intervention: 'intervention',
-  images: 'images',
+  imagePaths: 'imagePaths',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   lectureId: 'lectureId'
