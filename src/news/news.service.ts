@@ -1,111 +1,110 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateNewsRequest } from './dto/create-news.dto';
-import { promises } from 'fs';
-import path from 'path';
-import { MulterService } from '../multer/multer.service';
-import { DataBaseResponse } from './types/news.types';
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException
+} from '@nestjs/common'
+import { PrismaService } from '../prisma/prisma.service'
+import { CreateNewsRequest } from './dto/create-news.dto'
+import { MulterService } from '../multer/multer.service'
+import { DataBaseResponse } from './types/news.types'
 
 @Injectable()
 export class NewsService {
+	constructor(
+		private readonly prismaService: PrismaService,
+		private readonly multerService: MulterService
+	) {}
+	async create(dto: CreateNewsRequest, image: Express.Multer.File) {
+		if (!image) {
+			throw new BadRequestException('Отсутствует новостная обложка')
+		}
 
-    constructor(private readonly prismaService: PrismaService, private readonly multerService: MulterService ) {}
-    async create(dto: CreateNewsRequest, image: Express.Multer.File) {
-        if (!image) {
-            throw new BadRequestException('Отсутствует новостная обложка'); 
-        }
+		const imagePath = await this.multerService.createFile(image)
 
-        const imagePath = `uploads/${Date.now()}-${image.originalname}`
+		const news = await this.prismaService.news.create({
+			data: { ...dto, imagePath }
+		})
 
-        try {
-            await promises.writeFile(imagePath, image.buffer);
-        } catch (err) {
-            throw new InternalServerErrorException('Ошибка при сохранения изображения')
-        }
+		return news
+	}
 
-        const news = await this.prismaService.news.create({data: {...dto, imagePath}})
-        
-        return news
-    }
+	async get(id: number) {
+		const news = await this.prismaService.news.findUnique({
+			where: { id }
+		})
 
-    async get(id: string) {
-        const news = await this.prismaService.news.findUnique({
-            where: {id: Number(id)}
-        })
+		if (!news) {
+			throw new NotFoundException('Новость с такой id отсутствует')
+		}
 
-        if (!news) {
-            throw new NotFoundException('Новость с такой id отсутствует')
-        }
+		return news
+	}
 
-        return news
-    }
+	async getLast() {
+		const news = await this.prismaService.news.findFirst({
+			orderBy: {
+				id: 'desc'
+			}
+		})
 
-    async getLast() {
-        const news = await this.prismaService.news.findFirst({
-            orderBy: {
-                id: 'desc'
-            }            
-        })
+		if (!news) {
+			throw new NotFoundException('Новость отсутствует')
+		}
 
-        if (!news) {
-            throw new NotFoundException('Новость отсутствует')
-        }
+		return news
+	}
 
-        return news
-    }
+	async getPartial(cursorId: number) {
+		let newsArr: DataBaseResponse[]
 
-    async getPartial(cursorId: string) {
-        let newsArr: DataBaseResponse[];
+		if (cursorId) {
+			newsArr = await this.prismaService.news.findMany({
+				take: 4,
+				skip: 1,
+				cursor: {
+					id: cursorId
+				},
+				orderBy: {
+					id: 'desc'
+				}
+			})
+		} else {
+			newsArr = await this.prismaService.news.findMany({
+				take: 4,
+				orderBy: {
+					id: 'desc'
+				}
+			})
+		}
 
-        if (cursorId) {
-            newsArr = await this.prismaService.news.findMany({
-                take: 4,
-                skip: 1,
-                cursor: {
-                    id: Number(cursorId)
-                },
-                orderBy: {
-                    id: 'desc'
-                }
-            })
-        } else {
-            newsArr = await this.prismaService.news.findMany({
-                take: 4,
-                orderBy: {
-                    id: 'desc'
-                }
-            })
-        }
+		if (!newsArr.length) {
+			throw new NotFoundException('Новости отсутствует')
+		}
 
-        if (!newsArr.length) {
-            throw new NotFoundException('Новости отсутствует')
-        }
+		return newsArr
+	}
 
-        return newsArr
-    }
+	async delete(id: number) {
+		const news = await this.prismaService.news.findUnique({
+			where: {
+				id
+			}
+		})
 
-    async delete(id: string) {
-        const news = await this.prismaService.news.findUnique({
-            where: {
-                id: Number(id)
-            }
-        })
+		if (!news) {
+			throw new NotFoundException('Новость с такой id отсутствует')
+		}
 
-        if (!news) {
-            throw new NotFoundException('Новость с такой id отсутствует')
-        }
+		await this.prismaService.news.delete({
+			where: {
+				id
+			}
+		})
 
-        await this.prismaService.news.delete({
-            where: {
-                id: Number(id)
-            }
-        })
+		await this.multerService.deleteFile(news.imagePath)
 
-        await this.multerService.deleteFile(news.imagePath)
+		return { message: `Новость ${news.title} успешно удалена` }
+	}
 
-        return {message: 'Новость успешно удалена'}
-    }
-
-    // update() {}
+	// update() {}
 }
-
