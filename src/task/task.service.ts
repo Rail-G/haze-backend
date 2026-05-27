@@ -1,7 +1,6 @@
 import {
 	BadRequestException,
 	Injectable,
-	InternalServerErrorException,
 	NotFoundException
 } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
@@ -25,7 +24,7 @@ export class TaskService {
 		return tasks
 	}
 
-	async getUnique(id: number) {
+	private async getUnique(id: number) {
 		const task = await this.prismaService.task.findUnique({
 			where: { id }
 		})

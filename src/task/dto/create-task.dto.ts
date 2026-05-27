@@ -1,14 +1,11 @@
 import {
 	ArrayMaxSize,
-	ArrayNotEmpty,
 	IsArray,
 	IsEnum,
-	IsInt,
 	IsNotEmpty,
 	IsOptional,
 	IsString,
 	MaxLength,
-	Min,
 	MinLength,
 	Validate
 } from 'class-validator'
@@ -53,5 +50,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
 	@IsOptional()
 	status: TaskStatus
 
+	@IsString({message: 'Путь должен быть строкой'})
+	@IsOptional()
 	imagePath: string
 }
