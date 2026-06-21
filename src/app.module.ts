@@ -9,6 +9,9 @@ import { MulterModule } from '@nestjs/platform-express'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { TaskModule } from './task/task.module'
+import { LectureModule } from './lecture/lecture.module'
+import { TaskdoneModule } from './taskdone/taskdone.module';
+import { LecturereportModule } from './lecturereport/lecturereport.module';
 
 @Module({
 	imports: [
@@ -29,7 +32,10 @@ import { TaskModule } from './task/task.module'
 		AuthModule,
 		NewsModule,
 		MulterModule,
-		TaskModule
+		TaskModule,
+		LectureModule,
+		TaskdoneModule,
+		LecturereportModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

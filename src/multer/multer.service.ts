@@ -31,7 +31,7 @@ export class MulterService {
 			})
 		})
 
-		await Promise.all(uploadPromises).catch(() => {
+		return await Promise.all(uploadPromises).catch(() => {
 			throw new InternalServerErrorException(
 				'Ошибка при сохранения изображения'
 			)

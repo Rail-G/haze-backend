@@ -60,6 +60,7 @@ export type LectureReportCountAggregateOutputType = {
   id: number
   count: number
   intervention: number
+  staffs: number
   imagePaths: number
   createdAt: number
   updatedAt: number
@@ -102,6 +103,7 @@ export type LectureReportCountAggregateInputType = {
   id?: true
   count?: true
   intervention?: true
+  staffs?: true
   imagePaths?: true
   createdAt?: true
   updatedAt?: true
@@ -199,6 +201,7 @@ export type LectureReportGroupByOutputType = {
   id: number
   count: number
   intervention: string
+  staffs: string[]
   imagePaths: string[]
   createdAt: Date
   updatedAt: Date
@@ -232,6 +235,7 @@ export type LectureReportWhereInput = {
   id?: Prisma.IntFilter<"LectureReport"> | number
   count?: Prisma.IntFilter<"LectureReport"> | number
   intervention?: Prisma.StringFilter<"LectureReport"> | string
+  staffs?: Prisma.StringNullableListFilter<"LectureReport">
   imagePaths?: Prisma.StringNullableListFilter<"LectureReport">
   createdAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
@@ -243,6 +247,7 @@ export type LectureReportOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   count?: Prisma.SortOrder
   intervention?: Prisma.SortOrder
+  staffs?: Prisma.SortOrder
   imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -257,6 +262,7 @@ export type LectureReportWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LectureReportWhereInput | Prisma.LectureReportWhereInput[]
   count?: Prisma.IntFilter<"LectureReport"> | number
   intervention?: Prisma.StringFilter<"LectureReport"> | string
+  staffs?: Prisma.StringNullableListFilter<"LectureReport">
   imagePaths?: Prisma.StringNullableListFilter<"LectureReport">
   createdAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
@@ -268,6 +274,7 @@ export type LectureReportOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   count?: Prisma.SortOrder
   intervention?: Prisma.SortOrder
+  staffs?: Prisma.SortOrder
   imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -286,6 +293,7 @@ export type LectureReportScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"LectureReport"> | number
   count?: Prisma.IntWithAggregatesFilter<"LectureReport"> | number
   intervention?: Prisma.StringWithAggregatesFilter<"LectureReport"> | string
+  staffs?: Prisma.StringNullableListFilter<"LectureReport">
   imagePaths?: Prisma.StringNullableListFilter<"LectureReport">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"LectureReport"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"LectureReport"> | Date | string
@@ -295,6 +303,7 @@ export type LectureReportScalarWhereWithAggregatesInput = {
 export type LectureReportCreateInput = {
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -305,6 +314,7 @@ export type LectureReportUncheckedCreateInput = {
   id?: number
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -314,6 +324,7 @@ export type LectureReportUncheckedCreateInput = {
 export type LectureReportUpdateInput = {
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -324,6 +335,7 @@ export type LectureReportUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -334,6 +346,7 @@ export type LectureReportCreateManyInput = {
   id?: number
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -343,6 +356,7 @@ export type LectureReportCreateManyInput = {
 export type LectureReportUpdateManyMutationInput = {
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -352,6 +366,7 @@ export type LectureReportUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -372,6 +387,7 @@ export type LectureReportCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   count?: Prisma.SortOrder
   intervention?: Prisma.SortOrder
+  staffs?: Prisma.SortOrder
   imagePaths?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -450,8 +466,17 @@ export type LectureReportUncheckedUpdateManyWithoutLectureNestedInput = {
   deleteMany?: Prisma.LectureReportScalarWhereInput | Prisma.LectureReportScalarWhereInput[]
 }
 
+export type LectureReportCreatestaffsInput = {
+  set: string[]
+}
+
 export type LectureReportCreateimagePathsInput = {
   set: string[]
+}
+
+export type LectureReportUpdatestaffsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type LectureReportUpdateimagePathsInput = {
@@ -462,6 +487,7 @@ export type LectureReportUpdateimagePathsInput = {
 export type LectureReportCreateWithoutLectureInput = {
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -471,6 +497,7 @@ export type LectureReportUncheckedCreateWithoutLectureInput = {
   id?: number
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -509,6 +536,7 @@ export type LectureReportScalarWhereInput = {
   id?: Prisma.IntFilter<"LectureReport"> | number
   count?: Prisma.IntFilter<"LectureReport"> | number
   intervention?: Prisma.StringFilter<"LectureReport"> | string
+  staffs?: Prisma.StringNullableListFilter<"LectureReport">
   imagePaths?: Prisma.StringNullableListFilter<"LectureReport">
   createdAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"LectureReport"> | Date | string
@@ -519,6 +547,7 @@ export type LectureReportCreateManyLectureInput = {
   id?: number
   count: number
   intervention: string
+  staffs?: Prisma.LectureReportCreatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportCreateimagePathsInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -527,6 +556,7 @@ export type LectureReportCreateManyLectureInput = {
 export type LectureReportUpdateWithoutLectureInput = {
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -536,6 +566,7 @@ export type LectureReportUncheckedUpdateWithoutLectureInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,6 +576,7 @@ export type LectureReportUncheckedUpdateManyWithoutLectureInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   count?: Prisma.IntFieldUpdateOperationsInput | number
   intervention?: Prisma.StringFieldUpdateOperationsInput | string
+  staffs?: Prisma.LectureReportUpdatestaffsInput | string[]
   imagePaths?: Prisma.LectureReportUpdateimagePathsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -556,6 +588,7 @@ export type LectureReportSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   count?: boolean
   intervention?: boolean
+  staffs?: boolean
   imagePaths?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -567,6 +600,7 @@ export type LectureReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   count?: boolean
   intervention?: boolean
+  staffs?: boolean
   imagePaths?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -578,6 +612,7 @@ export type LectureReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   count?: boolean
   intervention?: boolean
+  staffs?: boolean
   imagePaths?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -589,13 +624,14 @@ export type LectureReportSelectScalar = {
   id?: boolean
   count?: boolean
   intervention?: boolean
+  staffs?: boolean
   imagePaths?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lectureId?: boolean
 }
 
-export type LectureReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "count" | "intervention" | "imagePaths" | "createdAt" | "updatedAt" | "lectureId", ExtArgs["result"]["lectureReport"]>
+export type LectureReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "count" | "intervention" | "staffs" | "imagePaths" | "createdAt" | "updatedAt" | "lectureId", ExtArgs["result"]["lectureReport"]>
 export type LectureReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lecture?: boolean | Prisma.LectureDefaultArgs<ExtArgs>
 }
@@ -615,6 +651,7 @@ export type $LectureReportPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: number
     count: number
     intervention: string
+    staffs: string[]
     imagePaths: string[]
     createdAt: Date
     updatedAt: Date
@@ -1046,6 +1083,7 @@ export interface LectureReportFieldRefs {
   readonly id: Prisma.FieldRef<"LectureReport", 'Int'>
   readonly count: Prisma.FieldRef<"LectureReport", 'Int'>
   readonly intervention: Prisma.FieldRef<"LectureReport", 'String'>
+  readonly staffs: Prisma.FieldRef<"LectureReport", 'String[]'>
   readonly imagePaths: Prisma.FieldRef<"LectureReport", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"LectureReport", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"LectureReport", 'DateTime'>

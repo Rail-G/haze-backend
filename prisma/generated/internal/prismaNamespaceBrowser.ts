@@ -116,6 +116,8 @@ export const TaskDoneScalarFieldEnum = {
   id: 'id',
   taskId: 'taskId',
   imagePaths: 'imagePaths',
+  intervention: 'intervention',
+  staffs: 'staffs',
   createdAt: 'createdAt'
 } as const
 
@@ -135,6 +137,7 @@ export const LectureReportScalarFieldEnum = {
   id: 'id',
   count: 'count',
   intervention: 'intervention',
+  staffs: 'staffs',
   imagePaths: 'imagePaths',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

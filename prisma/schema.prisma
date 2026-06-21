@@ -50,6 +50,8 @@ model TaskDone {
   task Task @relation(fields: [taskId], references: [id])
   taskId Int @unique @map("task_id")
   imagePaths String[]
+  intervention String
+  staffs String[]
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("task_done")
@@ -68,6 +70,7 @@ model LectureReport {
   id Int @id @default(autoincrement())
   count Int
   intervention String
+  staffs String[]
   imagePaths String[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")

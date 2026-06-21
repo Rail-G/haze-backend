@@ -19,6 +19,9 @@ export class TaskService {
 		const tasks = this.prismaService.task.findMany({
 			orderBy: {
 				id: 'asc'
+			},
+			include: {
+				completed: true
 			}
 		})
 		return tasks

@@ -20,6 +20,9 @@ export class LectureService {
 		const lecture = await this.prismaService.lecture.findFirst({
 			orderBy: {
 				id: 'desc'
+			},
+			include: {
+				reports: true
 			}
 		})
 

@@ -42,7 +42,7 @@ export class CreateTaskDto {
 		message: 'Условия не должно превышать 100 символов',
 		each: true
 	})
-	conditions: string[]
+	conditions: string[] | []
 }
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {

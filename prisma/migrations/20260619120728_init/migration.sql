@@ -49,6 +49,8 @@ CREATE TABLE "task_done" (
     "id" SERIAL NOT NULL,
     "task_id" INTEGER NOT NULL,
     "imagePaths" TEXT[],
+    "intervention" TEXT NOT NULL,
+    "staffs" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "task_done_pkey" PRIMARY KEY ("id")
@@ -68,6 +70,7 @@ CREATE TABLE "lecture_report" (
     "id" SERIAL NOT NULL,
     "count" INTEGER NOT NULL,
     "intervention" TEXT NOT NULL,
+    "staffs" TEXT[],
     "imagePaths" TEXT[],
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
