@@ -50,7 +50,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
 	@IsOptional()
 	status: TaskStatus
 
-	@IsString({message: 'Путь должен быть строкой'})
+	@IsString({ message: 'Путь должен быть строкой' })
 	@IsOptional()
 	imagePath: string
 }

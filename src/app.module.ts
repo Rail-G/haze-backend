@@ -10,8 +10,8 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { TaskModule } from './task/task.module'
 import { LectureModule } from './lecture/lecture.module'
-import { TaskdoneModule } from './taskdone/taskdone.module';
-import { LecturereportModule } from './lecturereport/lecturereport.module';
+import { TaskdoneModule } from './taskdone/taskdone.module'
+import { LecturereportModule } from './lecturereport/lecturereport.module'
 
 @Module({
 	imports: [

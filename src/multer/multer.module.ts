@@ -1,4 +1,4 @@
-import { BadRequestException, Global, Module } from '@nestjs/common'
+import { Global, Module, UnsupportedMediaTypeException } from '@nestjs/common'
 import { MulterService } from './multer.service'
 import multer from 'multer'
 import { MulterModule as Multer } from '@nestjs/platform-express'
@@ -11,7 +11,9 @@ import { MulterModule as Multer } from '@nestjs/platform-express'
 			fileFilter: (req, file, callback) => {
 				if (!file.mimetype.startsWith('image/')) {
 					return callback(
-						new BadRequestException('Разрешено только изображения'),
+						new UnsupportedMediaTypeException(
+							'Разрешено только изображения'
+						),
 						false
 					)
 				}

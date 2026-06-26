@@ -1,37 +1,42 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { MulterService } from '../multer/multer.service';
-import { CreateTaskDoneDto } from './dto/create-task-done.dto';
+import { BadRequestException, Injectable } from '@nestjs/common'
+import { PrismaService } from '../prisma/prisma.service'
+import { MulterService } from '../multer/multer.service'
+import { CreateTaskDoneDto } from './dto/create-task-done.dto'
 
 @Injectable()
 export class TaskdoneService {
-    constructor(private readonly prismaService: PrismaService, private readonly multerService: MulterService) {}
-    
-    async create(dto: CreateTaskDoneDto, images: Express.Multer.File[]) {
-        if (!images.length) {
-            throw new BadRequestException("Отчет без изображения не принимается")
-        }
+	constructor(
+		private readonly prismaService: PrismaService,
+		private readonly multerService: MulterService
+	) {}
 
-        const task = await this.prismaService.task.findUnique({
-            where: {
-                id: Number(dto.taskId)
-            }
-        })
+	async create(dto: CreateTaskDoneDto, images: Express.Multer.File[]) {
+		if (!images.length) {
+			throw new BadRequestException(
+				'Отчет без изображения не принимается'
+			)
+		}
 
-        if (!task) {
-            throw new BadRequestException("Задача с такой ID не существует")
-        }
+		const task = await this.prismaService.task.findUnique({
+			where: {
+				id: Number(dto.taskId)
+			}
+		})
 
-        const imagePaths = await this.multerService.createFiles(images)
+		if (!task) {
+			throw new BadRequestException('Задача с такой ID не существует')
+		}
 
-        const taskDone = await this.prismaService.taskDone.create({
-            data: {
-                ...dto,
-                taskId: Number(dto.taskId),
-                imagePaths
-            }
-        })
+		const imagePaths = await this.multerService.createFiles(images)
 
-        return taskDone
-    }
+		const taskDone = await this.prismaService.taskDone.create({
+			data: {
+				...dto,
+				taskId: Number(dto.taskId),
+				imagePaths
+			}
+		})
+
+		return taskDone
+	}
 }

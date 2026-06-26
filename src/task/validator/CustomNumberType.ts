@@ -1,6 +1,6 @@
 import {
 	ValidatorConstraint,
-	ValidatorConstraintInterface,
+	ValidatorConstraintInterface
 } from 'class-validator'
 
 @ValidatorConstraint({ name: 'customNumber', async: false })
